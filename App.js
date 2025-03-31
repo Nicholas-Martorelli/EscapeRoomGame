@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeScreen from "./screens/HomeScreen";
+import GameScreen from "./screens/GameScreen";
+import BookshelfScreen from "./screens/BookshelfScreen";
+import DeskScreen from "./screens/DeskScreen";
+import SecretDoorScreen from "./screens/SecretDoorScreen";
+import FinalRoomScreen from "./screens/FinalRoomScreen";
+import LibriAntichi from "./screens/LibriAntichi";
+import LibriProibiti from "./screens/LibriProibiti";
+
+const Stack = createStackNavigator();
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false}}>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Game" component={GameScreen}/>
+        <Stack.Screen name="Bookshelf" component={BookshelfScreen} />
+        <Stack.Screen name="Desk" component={DeskScreen} />
+        <Stack.Screen name="SecretDoor" component={SecretDoorScreen} /> 
+        <Stack.Screen name="FinalRoom" component={FinalRoomScreen} /> 
+        <Stack.Screen name="LibriAntichi" component={LibriAntichi} /> 
+        <Stack.Screen name="LibriProibiti" component={LibriProibiti}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
