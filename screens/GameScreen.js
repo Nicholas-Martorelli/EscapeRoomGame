@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   TouchableOpacity,
   Image,
@@ -25,6 +24,10 @@ const GameScreen = ({ navigation, route }) => {
           style={styles.transparentButton2}
           onPress={() => navigation.navigate("LibriProibiti")}
         ></TouchableOpacity>
+        <TouchableOpacity
+          style={styles.transparentButton3}
+          onPress={() => navigation.navigate("Desk", { trovato })}
+        ></TouchableOpacity>
       </View>
       {!trovato ? (
         <Text style={styles.description}>
@@ -35,8 +38,7 @@ const GameScreen = ({ navigation, route }) => {
         </Text>
       ) : (
         <>
-          <Text style={styles.description}>Vai alla scricvania</Text>
-          <Button title="Prosegui" onPress={() => navigation.navigate("Desk")} />
+          <Text style={styles.description}>Ho sentito un rumore, proveniva dalla scrivania! Controlliamo!</Text>
         </>
       )}
     </View>
@@ -55,21 +57,31 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  transparentButton3: {
+    position: "absolute",
+    top: "50%",
+    left: "35%",
+    height: 20,
+    width: 55,
+    padding: 10,
+    borderColor: "white",
+    borderWidth: 1,
+  },
   transparentButton1: {
     position: "absolute",
-    top: "20%",
-    left: "60%",
-    height: 200,
-    width: 100,
+    top: "35%",
+    left: "17%",
+    height: 50,
+    width: 55,
     padding: 10,
     borderColor: "white",
     borderWidth: 1,
   },
   transparentButton2: {
     position: "absolute",
-    top: "20%",
-    left: "40%",
-    height: 200,
+    top: "35%",
+    left: "1%",
+    height: 60,
     width: 40,
     padding: 10,
     borderColor: "white",

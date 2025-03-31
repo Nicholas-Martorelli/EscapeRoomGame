@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-const DeskScreen = ({ navigation }) => {
+const DeskScreen = ({ navigation, route}) => {
   const [answer, setAnswer] = useState("");
   const [message, setMessage] = useState("");
+  const { trovato } = route.params || { trovato: false };
+
 
   const checkAnswer = () => {
     if (answer.toLowerCase() === "respiro") {
@@ -15,31 +17,42 @@ const DeskScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>🖋️ La Scrivania Misteriosa</Text>
-      <Text style={styles.description}>
-        Ti siedi davanti a un’antica scrivania in legno massiccio. Sopra di essa trovi 
-        il segnalibro con l’enigma trovato tra i libri:
-      </Text>
-      <Text style={styles.riddle}>
-        **"Sono leggero come una piuma, ma nemmeno il più forte può tenermi a lungo. Cosa sono?"**
-      </Text>
+            <View style={styles.buttonBack}>
+            <Button title="Back" onPress={() => navigation.navigate("Game",{trovato})} />
+            </View>
+      <Text style={styles.title}>Una Scrivania</Text>
+      {!trovato ? (
+        <Text style={styles.description}>
+          è una semplice scrivania, ma non sembra contenere nulla di interessante.
+        </Text>
 
-      {/* Input per inserire la risposta */}
-      <TextInput
-        style={styles.input}
-        placeholder="Scrivi la tua risposta..."
-        value={answer}
-        onChangeText={setAnswer}
-      />
+      ) : (
+        <><Text style={styles.description}>
+          Ti siedi davanti a un’antica scrivania in legno massiccio. Sopra di essa trovi
+          un foglio ed una penna con l’enigma trovato tra i libri:
+        </Text><Text style={styles.riddle}>
+            "Sono leggero come una piuma, ma nemmeno il più forte può tenermi a lungo. Cosa sono?"
+          </Text>
+          {/* Input per inserire la risposta */}
+          <TextInput
+            style={styles.input}
+            placeholder="Scrivi la tua risposta..."
+            value={answer}
+            onChangeText={setAnswer}
+          />
+          {/* Passaggio alla prossima scena dopo la risposta corretta */}
+          {message.includes("Corretto") && (
+            <Button title="Prosegui alla Porta Segreta" onPress={() => navigation.navigate("SecretDoor")} />
+          )}
+          <Button title="Invia Risposta" onPress={checkAnswer} />
+        </>
 
-      <Button title="Invia Risposta" onPress={checkAnswer} />
+      )}
+
+
 
       {message !== "" && <Text style={styles.message}>{message}</Text>}
 
-      {/* Passaggio alla prossima scena dopo la risposta corretta */}
-      {message.includes("Corretto") && (
-        <Button title="Prosegui alla Porta Segreta" onPress={() => navigation.navigate("SecretDoor")} />
-      )}
     </View>
   );
 };
@@ -50,6 +63,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+  },
+  buttonBack: {
+    position: "absolute",
+    top: 50,
+    left: 40,
+    zIndex: 1,  
   },
   title: {
     fontSize: 28,
