@@ -28,6 +28,12 @@ const GameScreen = ({ navigation, route }) => {
           style={styles.transparentButton3}
           onPress={() => navigation.navigate("Desk", { trovato })}
         ></TouchableOpacity>
+        <TouchableOpacity 
+        style={styles.transparentButton4}
+        onPress={()=> navigation.navigate("SecretDoor")}
+        >
+
+        </TouchableOpacity>
       </View>
       {!trovato ? (
         <Text style={styles.description}>
@@ -56,6 +62,16 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
+  },
+  transparentButton4:{
+    position: "absolute",
+    top: "36%",
+    left: "68%",
+    height: 53,
+    width: 20,
+    padding: 10,
+    borderColor: "white",
+    borderWidth: 1,
   },
   transparentButton3: {
     position: "absolute",
