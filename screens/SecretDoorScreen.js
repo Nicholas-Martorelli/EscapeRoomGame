@@ -1,45 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
 
 const SecretDoorScreen = ({ navigation }) => {
-  const [code, setCode] = useState("");
-  const [message, setMessage] = useState("");
 
-  const checkCode = () => {
-    if (code === "314") {
-      setMessage("✅ Il meccanismo scatta e la porta si apre lentamente...");
-    } else {
-      setMessage("❌ Il codice è errato. Riprova!");
-    }
-  };
+
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>🚪 La Porta Segreta</Text>
       <Text style={styles.description}>
-        Ti trovi davanti a una grande porta di legno scuro. Sulla serratura è inciso un simbolo di chiave.  
-        Accanto alla porta c'è una piccola placca di metallo con tre cifre incise.
+        Questa porta sembra chiusa.
       </Text>
+      <View style={styles.card}>
+        <Image source={require("./img/libreria.jpg")} style={styles.image}/>
+      </View>
 
-      <Text style={styles.hint}>🔑 La chiave che hai trovato ha un'incisione con il numero "π".</Text>
-
-      {/* Input per inserire il codice */}
-      <TextInput
-        style={styles.input}
-        placeholder="Inserisci il codice..."
-        keyboardType="numeric"
-        value={code}
-        onChangeText={setCode}
-      />
-
-      <Button title="Sblocca la porta" onPress={checkCode} />
-
-      {message !== "" && <Text style={styles.message}>{message}</Text>}
-
-      {/* Passaggio alla prossima scena dopo la risposta corretta */}
-      {message.includes("Il meccanismo scatta") && (
-        <Button title="Entra nella stanza successiva" onPress={() => navigation.navigate("FinalRoom")} />
-      )}
     </View>
   );
 };
@@ -50,6 +24,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+  },
+  image:{
+    width: "100%",
+    height: "100%",
+  },
+  card:{
+    width: "100%",
+    height: 300,
+    borderRadius: 15,
+    overflow: "hidden",
+    position: "relative",
   },
   title: {
     fontSize: 28,

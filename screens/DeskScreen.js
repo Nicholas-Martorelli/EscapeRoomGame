@@ -9,7 +9,7 @@ const DeskScreen = ({ navigation, route}) => {
 
   const checkAnswer = () => {
     if (answer.toLowerCase() === "respiro") {
-      setMessage("✅ Corretto! Il cassetto si apre rivelando una chiave antica.");
+      setMessage("✅ Corretto! Senti come se la porta si fosse finalmente aperta");
     } else {
       setMessage("❌ Sbagliato! Prova a pensare a qualcosa di impalpabile...");
     }
@@ -28,8 +28,7 @@ const DeskScreen = ({ navigation, route}) => {
 
       ) : (
         <><Text style={styles.description}>
-          Ti siedi davanti a un’antica scrivania in legno massiccio. Sopra di essa trovi
-          un foglio ed una penna con l’enigma trovato tra i libri:
+          Sulla scrivania che prima sembrava vuota ora è apparso un foglio ed una penna, e sul foglio c'è lo spazio per rispondere all'indovinello
         </Text><Text style={styles.riddle}>
             "Sono leggero come una piuma, ma nemmeno il più forte può tenermi a lungo. Cosa sono?"
           </Text>
@@ -42,7 +41,7 @@ const DeskScreen = ({ navigation, route}) => {
           />
           {/* Passaggio alla prossima scena dopo la risposta corretta */}
           {message.includes("Corretto") && (
-            <Button title="Prosegui alla Porta Segreta" onPress={() => navigation.navigate("SecretDoor")} />
+            <Button title="Prosegui alla Porta" onPress={() => navigation.navigate("SecretDoor")} />
           )}
           <Button title="Invia Risposta" onPress={checkAnswer} />
         </>
