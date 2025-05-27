@@ -60,6 +60,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
   },
+  btnRegole:{
+    backgroundColor: '#ffcc00',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    marginTop: 10,
+  }
 });
 
 export default HomeScreen;

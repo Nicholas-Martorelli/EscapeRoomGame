@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
 
 const DeskScreen = ({ navigation, route}) => {
   const [answer, setAnswer] = useState("");
@@ -27,7 +27,9 @@ const DeskScreen = ({ navigation, route}) => {
         </Text>
 
       ) : (
-        <><Text style={styles.description}>
+        <>
+        <Image source={require("./img/libro aperto.jpg")} style={styles.image}/>
+        <Text style={styles.description}>
           Sulla scrivania che prima sembrava vuota ora è apparso un foglio ed una penna, e sul foglio c'è lo spazio per rispondere all'indovinello
         </Text><Text style={styles.riddle}>
             "Sono leggero come una piuma, ma nemmeno il più forte può tenermi a lungo. Cosa sono?"
@@ -41,7 +43,7 @@ const DeskScreen = ({ navigation, route}) => {
           />
           {/* Passaggio alla prossima scena dopo la risposta corretta */}
           {message.includes("Corretto") && (
-            <Button title="Prosegui alla Porta" onPress={() => navigation.navigate("SecretDoor")} />
+            <Button title="Prosegui alla Porta" onPress={() => navigation.navigate("SecretDoor",{trovato})} />
           )}
           <Button title="Invia Risposta" onPress={checkAnswer} />
         </>
@@ -101,6 +103,10 @@ const styles = StyleSheet.create({
     color: "green",
     fontStyle: "italic",
   },
+  image:{
+    height:"30%",
+    width: "100%"
+  }
 });
 
 export default DeskScreen;

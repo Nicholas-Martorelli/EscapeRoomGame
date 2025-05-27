@@ -21,8 +21,7 @@ export default function LibriAntichi({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.transparentButton2}
-          onPress={() => alert("Hai trovato un vecchio segnalibro con un enigma scritto sopra:\n\n" +
-            "Sono leggero come una piuma, ma nemmeno il più forte può tenermi a lungo. Cosa sono?")}
+          onPress={() => alert("Niente, solo un pò di polvere")}
         >
         </TouchableOpacity>
       </View>

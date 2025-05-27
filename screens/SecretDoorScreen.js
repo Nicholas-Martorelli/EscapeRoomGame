@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
 
-const SecretDoorScreen = ({ navigation }) => {
-
-
+const SecretDoorScreen = ({ navigation, route}) => {
+  const { trovato } = route.params || { trovato: false };
 
   return (
     <View style={styles.container}>
+      <View style={styles.buttonBack}>
+        <Button title="Back" onPress={() => navigation.navigate("Game", {trovato})} />
+      </View>
       <Text style={styles.description}>
-        Questa porta sembra chiusa.
+        Qualcosa non ti convince ma non capisci cosa
       </Text>
       <View style={styles.card}>
-        <Image source={require("./img/libreria.jpg")} style={styles.image}/>
+        {trovato ? (
+          <Image source={require("./img/portaAperta.jpeg")} style={styles.image} />
+        ) : (
+          <Image source={require("./img/portachiusa.jpeg")} style={styles.image} />
+        )}
       </View>
-
     </View>
   );
 };
@@ -25,11 +30,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
-  image:{
+  image: {
     width: "100%",
     height: "100%",
   },
-  card:{
+  card: {
     width: "100%",
     height: 300,
     borderRadius: 15,
@@ -40,6 +45,12 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+  buttonBack: {
+    position: "absolute",
+    top: 50,
+    left: 40,
+    zIndex: 1,  
   },
   description: {
     fontSize: 18,
