@@ -9,6 +9,7 @@ import SecretDoorScreen from "./screens/SecretDoorScreen";
 import FinalRoomScreen from "./screens/FinalRoomScreen";
 import LibriAntichi from "./screens/LibriAntichi";
 import LibriProibiti from "./screens/LibriProibiti";
+import CorridorScene from "./screens/CorridorScene";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="FinalRoom" component={FinalRoomScreen} /> 
         <Stack.Screen name="LibriAntichi" component={LibriAntichi} /> 
         <Stack.Screen name="LibriProibiti" component={LibriProibiti}/>
+        <Stack.Screen name="CorridorScene" component={CorridorScene}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

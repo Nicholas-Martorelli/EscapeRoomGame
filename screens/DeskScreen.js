@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
 
-const DeskScreen = ({ navigation, route}) => {
+const DeskScreen = ({ navigation, route }) => {
   const [answer, setAnswer] = useState("");
   const [message, setMessage] = useState("");
   const { trovato } = route.params || { trovato: false };
   const [risolto, setRisolto] = useState(false);
-  
-
 
   const checkAnswer = () => {
     if (answer.toLowerCase() === "respiro") {
@@ -20,47 +18,41 @@ const DeskScreen = ({ navigation, route}) => {
 
   return (
     <View style={styles.container}>
-            <View style={styles.buttonBack}>
-            <Button title="Back" onPress={() => navigation.navigate("Game",{trovato,risolto})} />
-            </View>
+      <View style={styles.buttonBack}>
+        <Button title="Back" onPress={() => navigation.navigate("Game", { trovato, risolto })} />
+      </View>
       <Text style={styles.title}>Una Scrivania</Text>
       {!trovato ? (
         <>
-        <Image source={require("./img/ScrivaniaVuota.png")} style={styles.image}/>
-        <Text style={styles.description}>
-          è una semplice scrivania, ma non sembra contenere nulla di interessante.
-        </Text>
-        <Button title="Suggerimento" onPress={() => alert("Forse è meglio tornare più tardi qua")} />
+          <Image source={require("./img/ScrivaniaVuota.png")} style={styles.image} />
+          <Text style={styles.description}>
+            è una semplice scrivania, ma non sembra contenere nulla di interessante.
+          </Text>
+          <Button title="Suggerimento" onPress={() => alert("Forse è meglio tornare più tardi qua")} />
         </>
-
       ) : (
         <>
-        <Image source={require("./img/ScrivaniaConLibro.png")} style={styles.image}/>
-        <Text style={styles.description}>
-          Sulla scrivania che prima sembrava vuota ora è apparso un foglio ed una penna, e sul foglio c'è lo spazio per rispondere all'indovinello
-        </Text><Text style={styles.riddle}>
+          <Image source={require("./img/ScrivaniaConLibro.png")} style={styles.image} />
+          <Text style={styles.description}>
+            Sulla scrivania che prima sembrava vuota ora è apparso un foglio ed una penna, e sul foglio c'è lo spazio per rispondere all'indovinello
+          </Text>
+          <Text style={styles.riddle}>
             "Sono leggero come una piuma, ma nemmeno il più forte può tenermi a lungo. Cosa sono?"
           </Text>
-          {/* Input per inserire la risposta */}
           <TextInput
             style={styles.input}
             placeholder="Scrivi la tua risposta..."
             value={answer}
             onChangeText={setAnswer}
           />
-          {/* Passaggio alla prossima scena dopo la risposta corretta */}
-          {message.includes("Corretto") && (
-            <Button title="Prosegui alla Porta" onPress={() => navigation.navigate("SecretDoor",{trovato, risolto})} />
+          {risolto ? (
+            <Button title="Prosegui alla Porta" onPress={() => navigation.navigate("SecretDoor", { trovato, risolto })} />
+          ) : (
+            <Button title="Invia Risposta" onPress={checkAnswer} />
           )}
-          <Button title="Invia Risposta" onPress={checkAnswer} />
         </>
-
       )}
-
-
-
       {message !== "" && <Text style={styles.message}>{message}</Text>}
-
     </View>
   );
 };
@@ -76,7 +68,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 50,
     left: 40,
-    zIndex: 1,  
+    zIndex: 1,
   },
   title: {
     fontSize: 28,
@@ -110,10 +102,10 @@ const styles = StyleSheet.create({
     color: "green",
     fontStyle: "italic",
   },
-  image:{
-    height:350,
-    width: "100%"
-  }
+  image: {
+    height: 350,
+    width: "100%",
+  },
 });
 
 export default DeskScreen;

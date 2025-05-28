@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Image,TouchableOpacity,} from "react-native";
 
 const SecretDoorScreen = ({ navigation, route }) => {
 const { trovato } = route.params || { trovato: false };
@@ -17,6 +17,10 @@ const { risolto } = route.params || { trovato: false };
         Si è aperta una porta segreta!
       </Text>
           <Image source={require("./img/portaAperta.jpeg")} style={styles.image} />
+        <TouchableOpacity
+          style={styles.transparentButtonCorridor}
+          onPress={() => navigation.navigate("CorridorScene", { trovato, risolto })}
+        ></TouchableOpacity>
           </>
         ) : (
           <>
@@ -45,6 +49,15 @@ image: {
   resizeMode: "cover",
   borderRadius: 10,
 },
+  transparentButtonCorridor: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderColor: "white",
+    borderWidth: 1,
+  },
 
 card: {
   alignItems: "center",

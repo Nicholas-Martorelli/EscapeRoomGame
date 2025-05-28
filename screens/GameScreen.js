@@ -52,7 +52,10 @@ const GameScreen = ({ navigation, route }) => {
             nell'ambiente. Devi scoprire il libro magico che ti permetterà di
             uscire. Ma attento: l'enigma non sarà facile.
           </Text>
-          <Button title="Suggerimento" onPress={() => alert("Premi in giro per scoprire nuovi indizi! \n N.B. premi lentamente potrebbe volerci un attimo a caricare l'indizio")} />
+<TouchableOpacity style={styles.btnRegole} onPress={() => alert("Premi in giro per scoprire nuovi indizi! \n N.B. premi lentamente potrebbe volerci un attimo a caricare l'indizio")}>
+  <Text style={styles.btnRegoleText}>Suggerimento</Text>
+</TouchableOpacity>
+
         </>
       ) : (
         <>
@@ -71,6 +74,19 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     position: "relative",
   },
+btnRegole: {
+  backgroundColor: '#ffcc00',
+  paddingVertical: 10,
+  paddingHorizontal: 20,
+  borderRadius: 10,
+  marginTop: 10,
+},
+btnRegoleText: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  color: 'black',
+  textAlign: 'center',
+},
   image: {
     width: "100%",
     height: "100%",
