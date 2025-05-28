@@ -14,8 +14,8 @@ const HomeScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Game')}>
           <Text style={styles.buttonText}>Inizia la Sfida</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnRegole} onPress={() => alert("1) Se puoi non usare Internet per le risposte \n 2) All'interno del gioco puoi premere su ogni cosa per cercare indizi")}>
-          <Text style={styles.buttonText}>Regolamento</Text>
+        <TouchableOpacity style={styles.btnRegole} onPress={() => alert("1) Se puoi non usare Internet per le risposte \n 2) All'interno del gioco puoi premere su ogni cosa per cercare indizi \n 3) Se hai bisogno di aiuto puoi premere il pulsante 'Suggerimento' \n 4) quando premi aspetta qualche secondo l'app potrebbe essere lenta nel caricare \n 5) buona fortuna!")}>
+          <Text style={styles.buttonText}>Regolamento e Consigli</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>

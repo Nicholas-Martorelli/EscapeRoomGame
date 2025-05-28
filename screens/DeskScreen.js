@@ -5,10 +5,13 @@ const DeskScreen = ({ navigation, route}) => {
   const [answer, setAnswer] = useState("");
   const [message, setMessage] = useState("");
   const { trovato } = route.params || { trovato: false };
+  const [risolto, setRisolto] = useState(false);
+  
 
 
   const checkAnswer = () => {
     if (answer.toLowerCase() === "respiro") {
+      setRisolto(true);
       setMessage("✅ Corretto! Senti come se la porta si fosse finalmente aperta");
     } else {
       setMessage("❌ Sbagliato! Prova a pensare a qualcosa di impalpabile...");
@@ -18,17 +21,21 @@ const DeskScreen = ({ navigation, route}) => {
   return (
     <View style={styles.container}>
             <View style={styles.buttonBack}>
-            <Button title="Back" onPress={() => navigation.navigate("Game",{trovato})} />
+            <Button title="Back" onPress={() => navigation.navigate("Game",{trovato,risolto})} />
             </View>
       <Text style={styles.title}>Una Scrivania</Text>
       {!trovato ? (
+        <>
+        <Image source={require("./img/ScrivaniaVuota.png")} style={styles.image}/>
         <Text style={styles.description}>
           è una semplice scrivania, ma non sembra contenere nulla di interessante.
         </Text>
+        <Button title="Suggerimento" onPress={() => alert("Forse è meglio tornare più tardi qua")} />
+        </>
 
       ) : (
         <>
-        <Image source={require("./img/libro aperto.jpg")} style={styles.image}/>
+        <Image source={require("./img/ScrivaniaConLibro.png")} style={styles.image}/>
         <Text style={styles.description}>
           Sulla scrivania che prima sembrava vuota ora è apparso un foglio ed una penna, e sul foglio c'è lo spazio per rispondere all'indovinello
         </Text><Text style={styles.riddle}>
@@ -43,7 +50,7 @@ const DeskScreen = ({ navigation, route}) => {
           />
           {/* Passaggio alla prossima scena dopo la risposta corretta */}
           {message.includes("Corretto") && (
-            <Button title="Prosegui alla Porta" onPress={() => navigation.navigate("SecretDoor",{trovato})} />
+            <Button title="Prosegui alla Porta" onPress={() => navigation.navigate("SecretDoor",{trovato, risolto})} />
           )}
           <Button title="Invia Risposta" onPress={checkAnswer} />
         </>
@@ -63,7 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    padding: 10,
   },
   buttonBack: {
     position: "absolute",
@@ -104,7 +111,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   image:{
-    height:"30%",
+    height:350,
     width: "100%"
   }
 });

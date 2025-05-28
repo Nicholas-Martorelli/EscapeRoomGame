@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, Button } from "react-native";
 
-export default function LibriProibiti({ navigation }) {
+export default function LibriProibiti({  navigation }) {
 
     const [trovato, setTrovato] = useState(false);
 
@@ -40,23 +40,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
-  transparentButton1:{
+ transparentButton1:{
     position: "absolute",
-    top:"10%",
-    left:"35%",
+    top:"1%",
+    left:"33%",
+    height: 120,
+    width: 30,
     padding: 10,
-    borderColor: "white",
+    borderColor: "trasparent",
     borderWidth: 1,
-    zIndex: 1, 
   },
   transparentButton2:{
     position: "absolute",
-    top:"50%",
-    left:"35%",
+    top:"30%",
+    left:"33%",
+    height: 170,
+    width: 50,
     padding: 10,
-    borderColor: "white",
-    borderWidth: 1,
-    zIndex: 1, 
+    borderColor: "trasparent",
   },
   image: {
     height: "100%",  

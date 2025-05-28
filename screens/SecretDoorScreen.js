@@ -1,23 +1,32 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
 
-const SecretDoorScreen = ({ navigation, route}) => {
-  const { trovato } = route.params || { trovato: false };
+const SecretDoorScreen = ({ navigation, route }) => {
+const { trovato } = route.params || { trovato: false };
+const { risolto } = route.params || { trovato: false };
 
   return (
     <View style={styles.container}>
       <View style={styles.buttonBack}>
-        <Button title="Back" onPress={() => navigation.navigate("Game", {trovato})} />
+        <Button title="Back" onPress={() => navigation.navigate("Game", { trovato, risolto })} />
       </View>
-      <Text style={styles.description}>
-        Qualcosa non ti convince ma non capisci cosa
-      </Text>
       <View style={styles.card}>
-        {trovato ? (
+        {risolto ? (
+          <>    
+      <Text style={styles.description}>
+        Si è aperta una porta segreta!
+      </Text>
           <Image source={require("./img/portaAperta.jpeg")} style={styles.image} />
+          </>
         ) : (
-          <Image source={require("./img/portachiusa.jpeg")} style={styles.image} />
+          <>
+            <Image source={require("./img/portachiusa.png")} style={styles.image} />
+            <View style={{ marginTop: 20 }}>
+              <Button title="Suggerimento" onPress={() => alert("Forse è meglio tornare più tardi qua")} />
+            </View>
+          </>
         )}
+
       </View>
     </View>
   );
@@ -30,17 +39,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
-  image: {
-    width: "100%",
-    height: "100%",
-  },
-  card: {
-    width: "100%",
-    height: 300,
-    borderRadius: 15,
-    overflow: "hidden",
-    position: "relative",
-  },
+image: {
+  width: 400,
+  height: 400,
+  resizeMode: "cover",
+  borderRadius: 10,
+},
+
+card: {
+  alignItems: "center",
+  justifyContent: "center",
+  marginTop: 20,
+}
+,
   title: {
     fontSize: 28,
     fontWeight: "bold",
@@ -50,7 +61,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 50,
     left: 40,
-    zIndex: 1,  
+    zIndex: 1,
   },
   description: {
     fontSize: 18,
