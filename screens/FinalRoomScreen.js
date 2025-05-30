@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   BackHandler,
+  Alert,
 } from "react-native";
 
 const FinalRoomScreen = ({ navigation }) => {
@@ -16,33 +17,48 @@ const FinalRoomScreen = ({ navigation }) => {
   const [solved, setSolved] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
+  // Nuovo stato per gestire se l'utente ha premuto "Sono pronto"
+  const [ready, setReady] = useState(false);
+
   const maxAttempts = 3;
-  const correctAnswer = "nuvola";
+  const validAnswers = ["madre", "mamma", "la madre", "la mamma"];
 
   const ghostRiddle =
-    "Cammino senza piedi, volo senza ali, piango senza occhi. Cosa sono?";
+    "Padre e figlio fanno un incidente e sfortunatamente il padre muore, mentre il figlio rimane gravemente ferito. Quest'ultimo viene portato d'urgenza al pronto soccorso per essere operato. Il chirurgo entra, lo guarda e dice: 'Non posso operarlo: è mio figlio!'. Chi è il Chirurgo?";
 
-  const checkAnswer = () => {
-    if (solved || gameOver) return;
+const checkAnswer = () => {
+  if (solved || gameOver) return;
 
-    if (answer.toLowerCase().trim() === correctAnswer) {
-      setSolved(true);
+  const userAnswer = answer.toLowerCase().trim();
+
+  if (validAnswers.includes(userAnswer)) {
+    setSolved(true);
+    setMessage(
+      "👻 Fantasma: “Hai risposto correttamente! Ecco il libro dell’eterna conoscenza e la chiave per uscire. \n Grazie per aver giocato! ”"
+    );
+  } else {
+    const newAttempts = attempts + 1;
+    setAttempts(newAttempts);
+    if (newAttempts >= maxAttempts) {
+      setGameOver(true);
       setMessage(
-        "👻 Fantasma: “Hai risposto correttamente! Ecco il libro dell’eterna conoscenza e la chiave per uscire.”"
+        "Sei diventato un fantasma... Hai sbagliato troppe volte l'indovinello e ora sei intrappolato qui per sempre.\n Grazie per aver giocato!"
       );
     } else {
-      const newAttempts = attempts + 1;
-      setAttempts(newAttempts);
-      if (newAttempts >= maxAttempts) {
-        setGameOver(true);
-        setMessage(
-          "Sei diventato un fantasma... Hai sbagliato troppe volte l'indovinello e ora sei intrappolato qui per sempre."
-        );
-      } else {
-        setMessage(`❌ Risposta errata. Hai ${maxAttempts - newAttempts} tentativi rimasti.`);
-      }
+      setMessage(`❌ Risposta errata. Hai ${maxAttempts - newAttempts} tentativi rimasti.`);
     }
-    setAnswer("");
+  }
+  setAnswer("");
+};
+
+  // Funzione per mostrare alert con indovinello e abilitare l’input
+  const handleReadyPress = () => {
+    Alert.alert("Ultimo indovinello", ghostRiddle, [
+      {
+        text: "Ok",
+        onPress: () => setReady(true),
+      },
+    ]);
   };
 
   return (
@@ -72,10 +88,20 @@ const FinalRoomScreen = ({ navigation }) => {
         )}
       </View>
 
-      {!solved && !gameOver && <Text style={styles.riddle}>{ghostRiddle}</Text>}
-
-      {!solved && !gameOver && (
+      {/* Mostra la domanda e il bottone "Sono pronto" solo se non ready e non risolto/gameover */}
+      {!ready && !solved && !gameOver && (
         <>
+          <Text style={styles.riddle}>
+            Hai solo 3 tentativi, sei pronto all'ultimo indovinello?
+          </Text>
+          <Button title="Sono pronto" onPress={handleReadyPress} />
+        </>
+      )}
+
+      {/* Se ready, mostra input e bottone per rispondere */}
+      {ready && !solved && !gameOver && (
+        <>
+          {/* Non mostriamo più l’indovinello come testo, perché è nell’alert */}
           <TextInput
             style={styles.input}
             placeholder="Scrivi la tua risposta..."
@@ -135,13 +161,13 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: "100%",
-    height: 500,
+    height: 350,
     marginBottom: 20,
   },
   image: {
     width: "100%",
     height: "100%",
-    resizeMode: "cover",
+    resizeMode: "contain",
   },
   riddle: {
     fontSize: 20,

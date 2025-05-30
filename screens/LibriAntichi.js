@@ -13,7 +13,7 @@ export default function LibriAntichi({ navigation, route }) {
       <Text style={styles.title}>Corsia 1: Libri Antichi</Text>
       <View style={styles.card}>
         <Image source={require("./img/libreriaDettaglio.jpg")} style={styles.image} />
-        {/* Button trasparente sopra l'immagine */}
+        {/* Pulsanti trasparenti sopra l'immagine */}
         <TouchableOpacity
           style={styles.transparentButton1}
           onPress={() => alert("Ci sei quasi")}
@@ -23,8 +23,6 @@ export default function LibriAntichi({ navigation, route }) {
           onPress={() => alert("Niente, solo un pò di polvere")}
         />
       </View>
-
-      {/* Titolo sotto l'immagine */}
     </View>
   );
 }
@@ -35,7 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#121212", // sfondo scuro
+    backgroundColor: "#121212", // sfondo scuro coerente
   },
   transparentButton1: {
     position: "absolute",
@@ -43,9 +41,8 @@ const styles = StyleSheet.create({
     left: "33%",
     height: 120,
     width: 30,
-    padding: 10,
-    borderColor: "transparent", // corretto typo
-    borderWidth: 1,
+    borderColor: "transparent",
+    borderWidth: 1, // necessario per il tocco anche con colore trasparente
   },
   transparentButton2: {
     position: "absolute",
@@ -53,8 +50,8 @@ const styles = StyleSheet.create({
     left: "33%",
     height: 170,
     width: 50,
-    padding: 10,
-    borderColor: "transparent", // corretto typo
+    borderColor: "transparent",
+    borderWidth: 1,
   },
   image: {
     height: "100%",
@@ -64,7 +61,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     textAlign: "center",
     marginBottom: 20,
-    color: "#e0e0e0", // testo chiaro
+    color: "#e0e0e0", // testo chiaro, leggibile su sfondo scuro
   },
   buttonBack: {
     position: "absolute",

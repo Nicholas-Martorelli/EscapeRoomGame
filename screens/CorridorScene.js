@@ -72,9 +72,14 @@ const CorridorScene = ({ navigation, route }) => {
           onPress={handleWrongDoor}
         />
       </View>
-      <Text style={styles.description}>
-        L’indovinello è la chiave. Scegli la porta giusta... sbagliare potrebbe costarti la vita.
-      </Text>
+      <>
+        <Text style={styles.description}>
+          L’indovinello è la chiave. Scegli la porta giusta... sbagliare potrebbe costarti la vita.
+        </Text>
+        <TouchableOpacity style={styles.btnRegole} onPress={() => alert("Le statue ti daranno un indizio su quale porta scegliere. Premi sulle statue per scoprire di più.")}>
+          <Text style={styles.btnRegoleText}>Suggerimento</Text>
+        </TouchableOpacity>
+      </>
     </View>
   );
 };
@@ -153,6 +158,19 @@ const styles = StyleSheet.create({
     left: "60%",
     height: 130,
     width: 40,
+  },
+    btnRegole: {
+    backgroundColor: '#ffcc00',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  btnRegoleText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
   },
 });
 

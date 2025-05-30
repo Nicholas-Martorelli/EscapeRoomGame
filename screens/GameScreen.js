@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Image,
-  Button,
+  Dimensions,
 } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const GameScreen = ({ navigation, route }) => {
   const { trovato } = route.params || { trovato: false };
-  const { risolto } = route.params || { risolto: false }; // corretto
+  const { risolto } = route.params || { risolto: false };
 
   return (
     <View style={styles.container}>
@@ -47,17 +49,24 @@ const GameScreen = ({ navigation, route }) => {
         <>
           <Text style={styles.description}>
             Sei entrato in una vasta biblioteca piena di libri misteriosi. L'aria
-            è pesante e la luce fioca, ma c'è qualcosa di affascinante
-            nell'ambiente. Devi scoprire il libro magico che ti permetterà di
-            uscire. Ma attento: l'enigma non sarà facile.
+            è pesante e la luce fioca. Scopri gli indizi e risolvi gli indovinelli per uscire da qui!
           </Text>
-          <TouchableOpacity style={styles.btnRegole} onPress={() => alert("Premi in giro per scoprire nuovi indizi! \n N.B. premi lentamente potrebbe volerci un attimo a caricare l'indizio")}>
+          <TouchableOpacity
+            style={styles.btnRegole}
+            onPress={() =>
+              alert(
+                "Premi in giro per scoprire nuovi indizi! \n N.B. premi lentamente potrebbe volerci un attimo a caricare l'indizio"
+              )
+            }
+          >
             <Text style={styles.btnRegoleText}>Suggerimento</Text>
           </TouchableOpacity>
         </>
       ) : (
         <>
-          <Text style={styles.description}>Ho sentito un rumore, proveniva dalla scrivania! Controlliamo!</Text>
+          <Text style={styles.description}>
+            Ho sentito un rumore, proveniva dalla scrivania! Controlliamo!
+          </Text>
         </>
       )}
     </View>
@@ -69,19 +78,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 1,
-    backgroundColor: "#121212", // sfondo scuro
+    padding: width * 0.05,
+    backgroundColor: "#121212",
   },
   title: {
-    fontSize: 32,
+    fontSize: width * 0.08,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 2,
     textAlign: "center",
-    color: "#e0e0e0", // testo chiaro
+    color: "#e0e0e0",
   },
   card: {
-    width: "100%",
-    height: 500,
+    width: width * 0.95,
+    height: height * 0.5,
     borderRadius: 15,
     overflow: "hidden",
     position: "relative",
@@ -92,89 +101,77 @@ const styles = StyleSheet.create({
   },
   transparentButton6: {
     position: "absolute",
-    top: "45%",
-    left: "33%",
-    height: 60,
-    width: 50,
-    padding: 10,
+    top: height * 0.22,
+    left: width * 0.3,
+    height: height * 0.08,
+    width: width * 0.13,
     borderColor: "transparent",
     borderWidth: 1,
   },
   transparentButtonFinestra: {
     position: "absolute",
-    top: "25%",
-    left: "1%",
-    height: 170,
-    width: 50,
-    padding: 10,
+    top: height * 0.12,
+    left: width * 0.01,
+    height: height * 0.21,
+    width: width * 0.13,
     borderColor: "transparent",
     borderWidth: 1,
   },
   transparentButtonPorta: {
     position: "absolute",
-    top: "48%",
-    left: "46%",
-    height: 53,
-    width: 30,
-    padding: 10,
+    top: height * 0.24,
+    left: width * 0.44,
+    height: height * 0.07,
+    width: width * 0.08,
     borderColor: "transparent",
     borderWidth: 1,
   },
   transparentButtonScrivania: {
     position: "absolute",
-    top: "65%",
-    left: "10%",
-    height: 130,
-    width: 200,
-    padding: 10,
+    top: height * 0.32,
+    left: width * 0.08,
+    height: height * 0.18,
+    width: width * 0.45,
     borderColor: "transparent",
     borderWidth: 1,
   },
   transparentButtonAntichi: {
     position: "absolute",
-    top: "26%",
-    left: "80%",
-    height: 200,
-    width: 70,
-    padding: 10,
+    top: height * 0.12,
+    left: width * 0.75,
+    height: height * 0.28,
+    width: width * 0.15,
     borderColor: "transparent",
     borderWidth: 1,
   },
   transparentButtonProibiti: {
     position: "absolute",
-    top: "40%",
-    left: "65%",
-    height: 100,
-    width: 30,
-    padding: 10,
+    top: height * 0.18,
+    left: width * 0.62,
+    height: height * 0.14,
+    width: width * 0.06,
     borderColor: "transparent",
     borderWidth: 1,
   },
   btnRegole: {
-    backgroundColor: '#ffcc00',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: "#ffcc00",
+    paddingVertical: height * 0.015,
+    paddingHorizontal: width * 0.05,
     borderRadius: 10,
-    marginTop: 10,
+    marginTop: height * 0.01,
   },
   btnRegoleText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'black',
-    textAlign: 'center',
+    fontSize: width * 0.05,
+    fontWeight: "bold",
+    color: "black",
+    textAlign: "center",
   },
   description: {
-    fontSize: 18,
+    fontSize: width * 0.05,
     textAlign: "center",
-    marginBottom: 40,
-    marginTop: 40,
-    color: "#e0e0e0", // testo chiaro
-  },
-  hint: {
-    marginTop: 20,
-    fontSize: 18,
-    color: "green",
-    fontStyle: "italic",
+    marginBottom: height * 0,
+    marginTop: height * 0,
+    color: "#e0e0e0",
   },
 });
 
