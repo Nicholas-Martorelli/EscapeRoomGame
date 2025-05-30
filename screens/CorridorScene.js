@@ -60,7 +60,7 @@ const CorridorScene = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.transparentButtonPortaAncora}
           onPress={() =>
-            navigation.navigate("StanzaArchivio", { trovato, risolto })
+            navigation.navigate("FinalRoomScreen", { trovato, risolto })
           }
         />
         <TouchableOpacity
@@ -72,10 +72,9 @@ const CorridorScene = ({ navigation, route }) => {
           onPress={handleWrongDoor}
         />
       </View>
-<Text style={styles.description}>
-  L’indovinello è la chiave. Scegli la porta giusta... sbagliare potrebbe costarti la vita.
-</Text>
-
+      <Text style={styles.description}>
+        L’indovinello è la chiave. Scegli la porta giusta... sbagliare potrebbe costarti la vita.
+      </Text>
     </View>
   );
 };
@@ -85,12 +84,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#121212",  // nuovo sfondo scuro
   },
   title: {
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
+    color: "#e0e0e0",  // nuovo colore testo chiaro
   },
   card: {
     width: "100%",
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 20,
     marginHorizontal: 20,
+    color: "#e0e0e0",  // nuovo colore testo chiaro
   },
   transparentButtonStatuaConVolto: {
     position: "absolute",

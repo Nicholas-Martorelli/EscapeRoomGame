@@ -10,7 +10,7 @@ import {
 
 const GameScreen = ({ navigation, route }) => {
   const { trovato } = route.params || { trovato: false };
-  const { risolto } = route.params || { trovato: false };
+  const { risolto } = route.params || { risolto: false }; // corretto
 
   return (
     <View style={styles.container}>
@@ -21,28 +21,27 @@ const GameScreen = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.transparentButtonAntichi}
           onPress={() => navigation.navigate("LibriAntichi", { trovato, risolto })}
-        ></TouchableOpacity>
+        />
         <TouchableOpacity
           style={styles.transparentButtonProibiti}
           onPress={() => navigation.navigate("LibriProibiti", { trovato, risolto })}
-        ></TouchableOpacity>
+        />
         <TouchableOpacity
           style={styles.transparentButtonScrivania}
           onPress={() => navigation.navigate("Desk", { trovato, risolto })}
-        ></TouchableOpacity>
+        />
         <TouchableOpacity
           style={styles.transparentButtonPorta}
           onPress={() => navigation.navigate("SecretDoor", { trovato, risolto })}
-        >
-        </TouchableOpacity>
+        />
         <TouchableOpacity
           style={styles.transparentButtonFinestra}
           onPress={() => alert("Dalla finestra non si vede molto, ma sembra che ci sia un giardino fuori")}
-        ></TouchableOpacity>
+        />
         <TouchableOpacity
           style={styles.transparentButton6}
           onPress={() => alert("Solo Antichi libri pieni di polvere, non sembrano interessanti")}
-        ></TouchableOpacity>
+        />
       </View>
       {!trovato ? (
         <>
@@ -52,10 +51,9 @@ const GameScreen = ({ navigation, route }) => {
             nell'ambiente. Devi scoprire il libro magico che ti permetterà di
             uscire. Ma attento: l'enigma non sarà facile.
           </Text>
-<TouchableOpacity style={styles.btnRegole} onPress={() => alert("Premi in giro per scoprire nuovi indizi! \n N.B. premi lentamente potrebbe volerci un attimo a caricare l'indizio")}>
-  <Text style={styles.btnRegoleText}>Suggerimento</Text>
-</TouchableOpacity>
-
+          <TouchableOpacity style={styles.btnRegole} onPress={() => alert("Premi in giro per scoprire nuovi indizi! \n N.B. premi lentamente potrebbe volerci un attimo a caricare l'indizio")}>
+            <Text style={styles.btnRegoleText}>Suggerimento</Text>
+          </TouchableOpacity>
         </>
       ) : (
         <>
@@ -67,6 +65,20 @@ const GameScreen = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 1,
+    backgroundColor: "#121212", // sfondo scuro
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#e0e0e0", // testo chiaro
+  },
   card: {
     width: "100%",
     height: 500,
@@ -74,19 +86,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     position: "relative",
   },
-btnRegole: {
-  backgroundColor: '#ffcc00',
-  paddingVertical: 10,
-  paddingHorizontal: 20,
-  borderRadius: 10,
-  marginTop: 10,
-},
-btnRegoleText: {
-  fontSize: 18,
-  fontWeight: 'bold',
-  color: 'black',
-  textAlign: 'center',
-},
   image: {
     width: "100%",
     height: "100%",
@@ -151,23 +150,25 @@ btnRegoleText: {
     borderColor: "transparent",
     borderWidth: 1,
   },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 1,
+  btnRegole: {
+    backgroundColor: '#ffcc00',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 10,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
+  btnRegoleText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
   },
   description: {
     fontSize: 18,
     textAlign: "center",
     marginBottom: 40,
     marginTop: 40,
+    color: "#e0e0e0", // testo chiaro
   },
   hint: {
     marginTop: 20,

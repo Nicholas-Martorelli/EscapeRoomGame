@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
+    backgroundColor: "#121212", // sfondo scuro
   },
   buttonBack: {
     position: "absolute",
@@ -74,11 +75,13 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
+    color: "#e0e0e0", // testo chiaro
   },
   description: {
     fontSize: 18,
     textAlign: "center",
     marginBottom: 20,
+    color: "#e0e0e0", // testo chiaro
   },
   riddle: {
     fontSize: 20,
@@ -86,6 +89,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
     fontStyle: "italic",
+    color: "#e0e0e0", // testo chiaro
   },
   input: {
     borderWidth: 1,
@@ -95,6 +99,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 5,
     textAlign: "center",
+    color: "#e0e0e0", // testo chiaro dentro input
   },
   message: {
     marginTop: 20,

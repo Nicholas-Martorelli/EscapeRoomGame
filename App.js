@@ -23,7 +23,7 @@ export default function App() {
         <Stack.Screen name="Bookshelf" component={BookshelfScreen} />
         <Stack.Screen name="Desk" component={DeskScreen} />
         <Stack.Screen name="SecretDoor" component={SecretDoorScreen} /> 
-        <Stack.Screen name="FinalRoom" component={FinalRoomScreen} /> 
+        <Stack.Screen name="FinalRoomScreen" component={FinalRoomScreen} /> 
         <Stack.Screen name="LibriAntichi" component={LibriAntichi} /> 
         <Stack.Screen name="LibriProibiti" component={LibriProibiti}/>
         <Stack.Screen name="CorridorScene" component={CorridorScene}/>

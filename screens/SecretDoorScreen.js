@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Image,TouchableOpacity,} from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const SecretDoorScreen = ({ navigation, route }) => {
-const { trovato } = route.params || { trovato: false };
-const { risolto } = route.params || { trovato: false };
+  const { trovato } = route.params || { trovato: false };
+  const { risolto } = route.params || { risolto: false }; // corretto qui
 
   return (
     <View style={styles.container}>
@@ -12,15 +12,13 @@ const { risolto } = route.params || { trovato: false };
       </View>
       <View style={styles.card}>
         {risolto ? (
-          <>    
-      <Text style={styles.description}>
-        Si è aperta una porta segreta!
-      </Text>
-          <Image source={require("./img/portaAperta.jpeg")} style={styles.image} />
-        <TouchableOpacity
-          style={styles.transparentButtonCorridor}
-          onPress={() => navigation.navigate("CorridorScene", { trovato, risolto })}
-        ></TouchableOpacity>
+          <>
+            <Text style={styles.description}>Si è aperta una porta segreta!</Text>
+            <Image source={require("./img/portaAperta.png")} style={styles.image} />
+            <TouchableOpacity
+              style={styles.transparentButtonCorridor}
+              onPress={() => navigation.navigate("CorridorScene", { trovato, risolto })}
+            />
           </>
         ) : (
           <>
@@ -30,7 +28,6 @@ const { risolto } = route.params || { trovato: false };
             </View>
           </>
         )}
-
       </View>
     </View>
   );
@@ -42,13 +39,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    backgroundColor: "#121212", // sfondo scuro
   },
-image: {
-  width: 400,
-  height: 400,
-  resizeMode: "cover",
-  borderRadius: 10,
-},
+  image: {
+    width: 400,
+    height: 400,
+    resizeMode: "cover",
+    borderRadius: 10,
+  },
   transparentButtonCorridor: {
     position: "absolute",
     top: 0,
@@ -58,17 +56,16 @@ image: {
     borderColor: "white",
     borderWidth: 1,
   },
-
-card: {
-  alignItems: "center",
-  justifyContent: "center",
-  marginTop: 20,
-}
-,
+  card: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
   title: {
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
+    color: "#e0e0e0", // testo chiaro (se mai usato)
   },
   buttonBack: {
     position: "absolute",
@@ -80,6 +77,7 @@ card: {
     fontSize: 18,
     textAlign: "center",
     marginBottom: 20,
+    color: "#e0e0e0", // testo chiaro
   },
   hint: {
     fontSize: 20,
@@ -97,6 +95,7 @@ card: {
     marginBottom: 20,
     borderRadius: 5,
     textAlign: "center",
+    color: "#e0e0e0", // testo chiaro se usato
   },
   message: {
     marginTop: 20,

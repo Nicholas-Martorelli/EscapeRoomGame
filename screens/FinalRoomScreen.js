@@ -1,43 +1,118 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  Button,
+  BackHandler,
+} from "react-native";
 
 const FinalRoomScreen = ({ navigation }) => {
-  const [password, setPassword] = useState("");
+  const [answer, setAnswer] = useState("");
   const [message, setMessage] = useState("");
+  const [attempts, setAttempts] = useState(0);
+  const [solved, setSolved] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
-  const checkPassword = () => {
-    if (password.toLowerCase() === "sapientia") {
-      setMessage("📖 Il libro si apre e una luce intensa riempie la stanza... Sei libero!");
+  const maxAttempts = 3;
+  const correctAnswer = "nuvola";
+
+  const ghostRiddle =
+    "Cammino senza piedi, volo senza ali, piango senza occhi. Cosa sono?";
+
+  const checkAnswer = () => {
+    if (solved || gameOver) return;
+
+    if (answer.toLowerCase().trim() === correctAnswer) {
+      setSolved(true);
+      setMessage(
+        "👻 Fantasma: “Hai risposto correttamente! Ecco il libro dell’eterna conoscenza e la chiave per uscire.”"
+      );
     } else {
-      setMessage("❌ La parola non è corretta. Riprova!");
+      const newAttempts = attempts + 1;
+      setAttempts(newAttempts);
+      if (newAttempts >= maxAttempts) {
+        setGameOver(true);
+        setMessage(
+          "Sei diventato un fantasma... Hai sbagliato troppe volte l'indovinello e ora sei intrappolato qui per sempre."
+        );
+      } else {
+        setMessage(`❌ Risposta errata. Hai ${maxAttempts - newAttempts} tentativi rimasti.`);
+      }
     }
+    setAnswer("");
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>📖 Il Libro Magico</Text>
-      <Text style={styles.description}>
-        Sei arrivato alla fine del tuo viaggio. Il libro antico davanti a te sembra vibrare di energia.  
-        Per aprirlo e fuggire, devi pronunciare la parola segreta...
-      </Text>
+      <Text style={styles.title}>Il Fantasma della Biblioteca</Text>
 
-      <Text style={styles.hint}>🔍 Hai trovato un indizio tra le pagine di un altro libro: "La conoscenza è la chiave".</Text>
+      <View style={styles.imageContainer}>
+        {!solved && !gameOver && (
+          <Image
+            source={require("./img/ghost.library.png")}
+            style={styles.image}
+          />
+        )}
 
-      {/* Input per la parola segreta */}
-      <TextInput
-        style={styles.input}
-        placeholder="Inserisci la parola segreta..."
-        value={password}
-        onChangeText={setPassword}
-      />
+        {solved && (
+          <Image
+            source={require("./img/good_ending_book.png")}
+            style={styles.image}
+          />
+        )}
 
-      <Button title="Apri il libro" onPress={checkPassword} />
+        {gameOver && (
+          <Image
+            source={require("./img/bad_ending_ghost.png")}
+            style={styles.image}
+          />
+        )}
+      </View>
 
-      {message !== "" && <Text style={styles.message}>{message}</Text>}
+      {!solved && !gameOver && <Text style={styles.riddle}>{ghostRiddle}</Text>}
 
-      {/* Fine del gioco dopo la risposta corretta */}
-      {message.includes("Il libro si apre") && (
-        <Button title="🎉 Esci dalla Biblioteca" onPress={() => navigation.navigate("Home")} />
+      {!solved && !gameOver && (
+        <>
+          <TextInput
+            style={styles.input}
+            placeholder="Scrivi la tua risposta..."
+            value={answer}
+            onChangeText={setAnswer}
+            editable={!solved && !gameOver}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+          <Button title="Prova" onPress={checkAnswer} />
+        </>
+      )}
+
+      {(solved || gameOver) && (
+        <>
+          <Text style={solved ? styles.goodEndingMessage : styles.message}>
+            {message}
+          </Text>
+
+          {solved && (
+            <Button
+              title="🎉 Esci dalla Biblioteca"
+              onPress={() => navigation.navigate("Home")}
+            />
+          )}
+
+          {gameOver && (
+            <Button
+              title="Chiudi l'app"
+              onPress={() => BackHandler.exitApp()}
+            />
+          )}
+        </>
+      )}
+
+      {!solved && message !== "" && !gameOver && (
+        <Text style={styles.message}>{message}</Text>
       )}
     </View>
   );
@@ -48,40 +123,57 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal: 20,
+    backgroundColor: "#111",
   },
   title: {
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
-  },
-  description: {
-    fontSize: 18,
     textAlign: "center",
+    color: "#fff",
+  },
+  imageContainer: {
+    width: "100%",
+    height: 500,
     marginBottom: 20,
   },
-  hint: {
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
+  riddle: {
     fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 20,
     fontStyle: "italic",
-    color: "#6a0dad",
+    marginBottom: 15,
+    textAlign: "center",
+    color: "#ddd",
   },
   input: {
+    borderRadius: 6,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#555",
     padding: 10,
-    width: "80%",
-    marginBottom: 20,
-    borderRadius: 5,
+    width: "100%",
+    marginBottom: 15,
     textAlign: "center",
+    color: "#fff",
+    backgroundColor: "#222",
   },
   message: {
-    marginTop: 20,
+    marginTop: 10,
+    fontSize: 16,
+    fontStyle: "italic",
+    color: "#ff6666",
+    textAlign: "center",
+  },
+  goodEndingMessage: {
     fontSize: 18,
     fontStyle: "italic",
-    color: "green",
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#ffcc00",
   },
 });
 
